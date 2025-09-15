@@ -1,0 +1,20 @@
+  "runId": "@{workflow().run.name}",
+  "eventId": "@{coalesce(body('Parse_JSON')?['eventId'], body()?['eventId'])}"
+
+
+----------
+
+{
+  "error": "unauthorized",
+  "reason": "missing_or_invalid_shared_secret",
+  "runId": "@{workflow().run.name}",
+  "eventId": "@{coalesce(body('Parse_JSON')?['eventId'], body()?['eventId'])}"
+}
+
+-------------
+
+curl -X POST "<CALLBACK_URL>" \
+  -H "Content-Type: application/json" \
+  -H "x-shared-secret: TEMP-SECRET-123" \
+  -d '{"eventId":"abc-123","type":"catalogUpdate"}' -i
+
